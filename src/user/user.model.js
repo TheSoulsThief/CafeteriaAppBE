@@ -53,8 +53,7 @@ var UserSchema = new mongoose.Schema({
         default: 'https://raw.githubusercontent.com/martinmicunda/employee-scheduling-ui/master/src/images/anonymous.jpg?123456'
     },
     provider: {
-        type: String,
-        required: 'Provider is required'
+        type: String
     },
     updated: {
         type: Date
@@ -62,6 +61,9 @@ var UserSchema = new mongoose.Schema({
     created: {
         type: Date,
         default: Date.now
+    },
+    lastname:{
+        type: String
     }
 });
 
@@ -101,6 +103,14 @@ UserSchema
         });
     }, 'The specified email address is already in use.');
 
+// Validate empty lastname
+UserSchema
+    .path('lastname')
+    .validate(function(lastname) {
+        // if you are authenticating by any of the oauth strategies, don't validate
+        if (authTypes.indexOf(this.provider) !== -1) return true;
+        return lastname.length;
+    }, 'Lastname cannot be blank');    
 /**
  * Pre-save hook (execute before each user.save() call)
  */
