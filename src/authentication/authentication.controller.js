@@ -124,7 +124,7 @@ function isAuthenticated(req, res, next) {
     console.log(req);
     token.verifyToken(req.headers, function(next, err, data) {
         if (err) {
-            logger.error(err.message);
+            //logger.error(err.message);
             return res.status(401).send(err.message);
         }
 

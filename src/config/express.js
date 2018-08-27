@@ -150,7 +150,7 @@ function initErrorRoutes(app) {
         if (!err) return next();
 
         // Log it
-        logger.error('Internal error(%d): %s', res.statusCode, err.stack);
+        //logger.error('Internal error(%d): %s', res.statusCode, err.stack);
 
         // Redirect to error page
         res.sendStatus(500);

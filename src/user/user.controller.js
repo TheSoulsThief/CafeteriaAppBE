@@ -29,8 +29,8 @@ function findById(req, res) {
             logger.error(err.message);
             return res.status(400).send(err);
         } else {
-            console.log(err);
-            console.log(user);
+            //console.log(err);
+            //console.log(user);
             console.log(req.params.id);
             res.json(user);
         }
