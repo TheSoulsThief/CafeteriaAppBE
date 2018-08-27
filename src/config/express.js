@@ -55,10 +55,13 @@ function initMiddleware(app) {
     app.use(methodOverride());
 
     // Add multipart handling middleware
-    app.use(multer({
-        dest: './uploads/',
-        inMemory: config.uploadFilesInMemory
-    }));
+    //app.use(multer({
+    //    dest: './uploads/',
+    //    inMemory: config.uploadFilesInMemory
+    //}));
+
+    //var multer = require('multer');
+    var upload = multer({ dest: './uploads' });
 
     // Setting router and the static folder for uploaded files
     app.use('/uploads', express.static(path.resolve('./uploads')));
