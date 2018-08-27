@@ -8,7 +8,16 @@
     },
     "main": "index.js",
     "scripts": {
-        "start": "node index.js"
+        "start": "node index.js",
+        "dev": "nodemon index -w 'src/**/*' --ext 'js json'",
+        "debug": "nodemon index --debug -w 'src/**/*' --ext 'js json'",
+        "lint": "jshint src/**/*.js",
+        "audit": "nsp audit-shrinkwrap && nsp audit-package",
+        "missing": "npm ls --depth 1",
+        "outdated": "npm outdated --depth 0",
+        "prepush": "npm shrinkwrap && npm test",
+        "postmerge": "npm install",
+        "pretest": "npm run lint"
     },
     "pre-commit": [
         "lint",
