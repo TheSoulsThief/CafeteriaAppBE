@@ -79,7 +79,7 @@ function initHelmetHeaders(app) {
     //app.use(helmet.xframe());
     app.use(helmet.frameguard());
     app.use(helmet.xssFilter());
-    app.use(helmet.nosniff());
+    app.use(helmet.noSniff());
     app.use(helmet.ienoopen());
     app.disable('x-powered-by');
 
