@@ -54,7 +54,7 @@ function extractTokenFromHeader(headers) {
  */
 function createToken(payload, cb) {
     var ttl = config.token.expiration;
-console.log(paylod);
+
     if(payload != null && typeof payload !== 'object') { return cb(new Error('payload is not an Object')) }
     if(ttl != null && typeof ttl !== 'number') { return cb(new Error('ttl is not a valid Number')) }
 
@@ -67,6 +67,7 @@ console.log(paylod);
      * Token is something like xxxxxxxxxxx.yyyy.zzzzzzzzzzzz. Where the x is the encoded header, the y is the encoded payload and
      * the z is the signature. So on front-end we can decode the yyyy part (the payload) if we need.
      */
+    console.log(paylod);
     var token = jwt.sign(payload, config.token.secret, { expiresInMinutes: config.token.expiration });
 
     if(redis) {
