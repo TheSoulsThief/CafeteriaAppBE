@@ -67,7 +67,7 @@ function createToken(payload, cb) {
      * Token is something like xxxxxxxxxxx.yyyy.zzzzzzzzzzzz. Where the x is the encoded header, the y is the encoded payload and
      * the z is the signature. So on front-end we can decode the yyyy part (the payload) if we need.
      */
-    console.log(paylod);
+    //console.log(paylod);
     var token = jwt.sign(payload, config.token.secret, { expiresInMinutes: config.token.expiration });
 
     if(redis) {
