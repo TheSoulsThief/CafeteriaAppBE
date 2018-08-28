@@ -54,7 +54,7 @@ function extractTokenFromHeader(headers) {
  */
 function createToken(payload, cb) {
     var ttl = config.token.expiration;
-
+console.log(paylod);
     if(payload != null && typeof payload !== 'object') { return cb(new Error('payload is not an Object')) }
     if(ttl != null && typeof ttl !== 'number') { return cb(new Error('ttl is not a valid Number')) }
 

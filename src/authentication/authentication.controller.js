@@ -25,8 +25,10 @@ var User     = require('../user/user.model.js');
  * @api public
  */
 function signin(req, res, next) {
+    console.log(req);
     passport.authenticate('local', function (err, user, info) {
         console.log(user);
+        console.log(err);
         var error = err || info;
         if (error) return res.status(401).send(error);
         console.log(user);
