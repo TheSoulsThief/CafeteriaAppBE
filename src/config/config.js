@@ -60,10 +60,10 @@ if (process.env.REDISTOGO_URL) {
 
 config.redis = {
     isAvailable: process.env.IS_REDIS_AVAILABLE || true,
-    host: process.env.REDIS_HOST || 'redis-13718.c9.us-east-1-2.ec2.cloud.redislabs.com',
-    port: process.env.REDIS_PORT || 13718,
+    host: process.env.REDIS_HOST || 'redis-19858.c9.us-east-1-2.ec2.cloud.redislabs.com',
+    port: process.env.REDIS_PORT || 19858,
     //password: process.env.auth_password || '7AKiH2TfC3nkhh11UaI8ITULPMGOQ6fz',
-    auth: process.env.REDIS_AUTH || '7AKiH2TfC3nkhh11UaI8ITULPMGOQ6fz',
+    auth: process.env.REDIS_AUTH || '123456',
     options: {}
 };
 
