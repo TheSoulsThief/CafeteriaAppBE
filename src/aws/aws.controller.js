@@ -66,8 +66,7 @@ function signS3Upload(req, res) {
     // };
     var policy = require('s3-policy');
     var p = policy({
-      //secret: process.env.AWS_SECRET_ACCESS_KEY,
-      secret: 'UqLs3ptQ1INtRFaO6wOYsT8ffZ/bilzq77mKaHS3',
+      secret: process.env.AWS_SECRET_ACCESS_KEY,
       length: 200000000,
       bucket: S3_BUCKET_NAME,
       key: fileName,
@@ -78,8 +77,7 @@ function signS3Upload(req, res) {
     //console.log(p.policy);
     //console.log(p.signature);
     var result = {
-      //AWSAccessKeyId: process.env.AWS_ACCESS_KEY_ID,
-      AWSAccessKeyId: 'AKIAITLRBRM7EYUT46EA' ,
+      AWSAccessKeyId: process.env.AWS_ACCESS_KEY_ID,
       key: fileName,
       policy: p.policy,
       signature: p.signature,
