@@ -24,7 +24,7 @@ function setAWSRoutes(app) {
         .get(authentication.isAuthenticated, image.findByUser);*/
     //app.route('/images/:id').delete(authentication.isAuthenticated, image.delete);
     app.route('/sign-s3-upload')
-        .post(authentication.isAuthenticated, aws.signS3Upload);
+        .get(authentication.isAuthenticated, aws.signS3Upload);
 }
 
 module.exports = setAWSRoutes;
