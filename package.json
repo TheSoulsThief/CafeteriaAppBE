@@ -1,10 +1,10 @@
 {
-    "name": "ionic-photo-gallery-server",
-    "version": "0.0.6",
-    "description": "A hybrid app with authentication that allows registered users view a gallery of photos they have uploaded via the camera phone.",
+    "name": "apptd-server",
+    "version": "0.0.1",
+    "description": "A hybrid app with authentication that allows registered users view a gallery of dresses photos they have uploaded via the camera phone.",
     "author": {
-        "name": "Martin Micunda",
-        "url": "http://martinmicunda.com"
+        "name": "Johnny Yankee",
+        "url": "http://atomikhero.com"
     },
     "main": "index.js",
     "scripts": {
@@ -31,10 +31,10 @@
     ],
     "keywords": [
         "mm",
-        "ionic",
         "node",
         "express",
-        "mobile"
+        "mobile",
+        "dress"
     ],
     "dependencies": {
         "bcryptjs": "^2.1.0",
@@ -44,6 +44,8 @@
         "express": "^4.12.3",
         "glob": "^7.1.2",
         "helmet": "^3.13.0",
+        "jsonwebtoken": "^4.2.1",
+        "lodash": "^3.5.0",
         "method-override": "^3.0.0",
         "mm-node-logger": "^0.0.*",
         "mongoose": "^5.2.9",
@@ -53,8 +55,7 @@
         "passport-local": "^1.0.0",
         "path": "^0.12.7",
         "redis": "^2.8.0",
-        "jsonwebtoken": "^4.2.1",
-        "lodash": "^3.5.0"
+        "s3-policy": "^0.2.0"
     },
     "devDependencies": {
         "nsp": "^3.2.1",
@@ -63,7 +64,7 @@
     },
     "license": {
         "type": "MIT",
-        "url": "https://github.com/martinmicunda/ionic-photo-gallery/master/LICENSE"
+        "url": "https://github.com/jerh56/apptd1/master/LICENSE"
     },
     "engines": {
         "node": ">=0.12",

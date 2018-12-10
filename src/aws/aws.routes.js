@@ -1,5 +1,5 @@
 /**
- * Image routes.
+ * AWS routes.
  *
  * @author    Johnny Yankee {@link http://atomikhero.com}
  * @copyright Copyright (c) 2018, Johnny Yankee
@@ -10,21 +10,21 @@
 /**
  * Module dependencies.
  */
-var image          = require('./image.controller.js');
+var aws          = require('./aws.controller.js');
 var authentication = require('../authentication/authentication.controller.js');
 
 /**
- * Set image routes.
+ * Set AWS routes.
  *
  * @param {Object} app The express application
  */
-function setImageRoutes(app) {
-    app.route('/images')
+function setAWSRoutes(app) {
+    /*app.route('/aws')
         .post(authentication.isAuthenticated, image.create)
-        .get(authentication.isAuthenticated, image.findByUser);
-
-    app.route('/images/:id').delete(authentication.isAuthenticated, image.delete);
-
+        .get(authentication.isAuthenticated, image.findByUser);*/
+    //app.route('/images/:id').delete(authentication.isAuthenticated, image.delete);
+    app.route('/sign-s3-upload')
+        .post(authentication.isAuthenticated, aws.signS3Upload);
 }
 
-module.exports = setImageRoutes;
+module.exports = setAWSRoutes;
