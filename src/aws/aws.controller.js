@@ -31,7 +31,7 @@ function signS3Upload(req, res) {
     //var folder = req.user._id +'/' ;
 
     var folder = 'iduser0000001' +'/' ;
-    
+  
     // crea la carpeta para guardar las imágenes
     var params = { Bucket: S3_BUCKET_NAME, Key: folder, ACL: 'public-read', Body:'body does not matter' };
     s3.upload(params, function (err, data) {
@@ -55,7 +55,8 @@ function signS3Upload(req, res) {
 
 
     // al fileName se le agrega el folder para que la firma lo reconozca
-    const fileName = req.user._id +'/' + req.query['filename'];
+    //const fileName = req.user._id +'/' + req.query['filename'];
+    const fileName = 'iduser0000001'  +'/' + req.query['filename'];
     const fileType = req.query['filetype'];
     // const s3Params = {
     //   Bucket: S3_BUCKET_NAME,
