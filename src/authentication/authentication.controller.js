@@ -25,13 +25,9 @@ var User     = require('../user/user.model.js');
  * @api public
  */
 function signin(req, res, next) {
-    console.log(req);
     passport.authenticate('local', function (err, user, info) {
-        console.log(user);
-        console.log(err);
         var error = err || info;
         if (error) return res.status(401).send(error);
-        console.log(user);
         // Remove sensitive data before login
         user.password = undefined;
         user.salt = undefined;
@@ -123,10 +119,9 @@ function signup(req, res) {
  * @api public
  */
 function isAuthenticated(req, res, next) {
-    console.log(req);
     token.verifyToken(req.headers, function(next, err, data) {
         if (err) {
-            //logger.error(err.message);
+            logger.error(err.message);
             return res.status(401).send(err.message);
         }
 
