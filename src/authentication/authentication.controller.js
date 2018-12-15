@@ -129,7 +129,7 @@ function isAuthenticated(req, res, next) {
         }
 
         req.user = data;
-        res.status(201).json({token: token});
+        res.status(201).json({token: true});
         //next();
     }.bind(null, next));
 }
