@@ -79,6 +79,7 @@ function signup(req, res) {
     var password = req.body.password || '';
 
     if (email == '' || password == '') {
+        console.log("Test 1");
         return res.sendStatus(400);
     }
 
@@ -90,6 +91,7 @@ function signup(req, res) {
     // Then save the user
     user.save(function(err, user) {
         if (err) {
+            console.log("Test 2");
             logger.error(err.message);
             return res.status(400).send(err);
         } else {
@@ -99,6 +101,7 @@ function signup(req, res) {
 
             token.createToken(user, function(res, err, token) {
                 if (err) {
+                    console.log("Test 3");
                     logger.error(err.message);
                     return res.status(400).send(err);
                 }
