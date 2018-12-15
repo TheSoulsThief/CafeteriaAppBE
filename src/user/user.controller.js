@@ -23,15 +23,10 @@ var User   = require('./user.model.js');
  */
 function findById(req, res) {
     User.findById(req.params.id, 'name email avatar', function (err, user) {
-    //User.findOne({_id:req.params.id}, 'name email avatar', function (err, user){
-    //User.findOne({_id:req.params.id}, function (err, user){
         if (err) {
             logger.error(err.message);
             return res.status(400).send(err);
         } else {
-            //console.log(err);
-            //console.log(user);
-            console.log(req.params.id);
             res.json(user);
         }
     });
