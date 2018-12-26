@@ -1,9 +1,9 @@
 /**
  * User model.
  *
- * @author    Martin Micunda {@link http://martinmicunda.com}
- * @copyright Copyright (c) 2015, Martin Micunda
- * @license	  The MIT License {@link http://opensource.org/licenses/MIT}
+ * @author    Johnny Yankee
+ * @copyright Copyright (c) 2018, Johnny Yankee
+ * @license	  The MIT License
  */
 'use strict';
 
