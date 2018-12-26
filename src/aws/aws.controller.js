@@ -90,6 +90,36 @@ function signS3Upload(req, res) {
     res.end();
   }
 
+function signS3Single(req, res){
+  const s3 = new aws.S3();
+  //const fileName = req.query['file-name'];
+  //const fileType = req.query['file-type'];
+  const fileName = 'iduser0000001'  +'/' + req.query['filename'];
+  const fileType = req.query['filetype'];
+
+  const s3Params = {
+    Bucket: S3_BUCKET_NAME,
+    Key: fileName,
+    Expires: 60,
+    ContentType: fileType,
+    ACL: 'public-read'
+  };
+
+  s3.getSignedUrl('putObject', s3Params, (err, data) => {
+    if(err){
+      console.log(err);
+      return res.end();
+    }
+    const returnData = {
+      signedRequest: data,
+      url: `https://${S3_BUCKET}.s3.amazonaws.com/${fileName}`
+    };
+    res.write(JSON.stringify(returnData));
+    res.end();
+  });
+};
+
 module.exports = {
-    signS3Upload: signS3Upload
+    signS3Upload: signS3Upload,
+    signS3Single: signS3Single
 };
