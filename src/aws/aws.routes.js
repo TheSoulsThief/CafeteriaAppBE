@@ -25,6 +25,8 @@ function setAWSRoutes(app) {
     //app.route('/images/:id').delete(authentication.isAuthenticated, image.delete); 
         app.route('/sign-s3-upload')
         .get(aws.signS3Upload);
+        app.route('/sign-s3-single')
+        .get(aws.signS3Single);
 }
 
 module.exports = setAWSRoutes;
