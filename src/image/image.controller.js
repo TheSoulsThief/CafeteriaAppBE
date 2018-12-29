@@ -37,14 +37,16 @@ function findByUser(req, res) {
  * Create image.
  *
  * @param {Object} req The request object
- * @param {Object} res The request object
+ * @param {Object} res The response object
  * @returns {Object} the new create image
  * @api public
  */
 function create(req, res) {
     var image = new Image();
-    image.fileName = req.files.image.name;
-    image.url = path.join(req.body.url, req.files.image.path);
+    //image.fileName = req.files.image.name;
+    //image.url = path.join(req.body.url, req.files.image.path);
+    image.fileName = req.body.fileName;
+    image.url = req.body.url;
     image.user = req.body.userId;
     image.size = req.body.size;
     image.color = req.body.color;
@@ -63,7 +65,7 @@ function create(req, res) {
  * Delete image.
  *
  * @param {Object} req The request object
- * @param {Object} res The request object
+ * @param {Object} res The response object
  * @api public
  */
 function deleteImage(req, res) {
