@@ -46,6 +46,8 @@ function create(req, res) {
     image.fileName = req.files.image.name;
     image.url = path.join(req.body.url, req.files.image.path);
     image.user = req.body.userId;
+    image.size = req.body.size;
+    image.color = req.body.color;
 
     image.save(function(err, image) {
         if (err) {

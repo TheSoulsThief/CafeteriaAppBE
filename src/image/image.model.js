@@ -28,7 +28,15 @@ var ImageSchema = new mongoose.Schema({
     user: {
         type: mongoose.Schema.Types.ObjectId,
         ref: User
+    },
+    size: {
+        type: String
+    },
+    color: {
+        type: String
     }
+    // TODO: Ocasion
+    // TODO: Formalidad
 });
 
 module.exports = mongoose.model('Image', ImageSchema);
