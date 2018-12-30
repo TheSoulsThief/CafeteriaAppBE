@@ -45,6 +45,7 @@ function create(req, res) {
     var image = new Image();
     //image.fileName = req.files.image.name;
     //image.url = path.join(req.body.url, req.files.image.path);
+    console.log(req.body);
     image.fileName = req.body.fileName;
     image.url = req.body.url;
     //image.user = req.body.userId;
