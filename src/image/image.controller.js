@@ -33,6 +33,18 @@ function findByUser(req, res) {
     });
 }
 
+function findAll(req, res) {
+    return Image.find({}, function (err, images) {
+        if (err) {
+            logger.error(err.message);
+            return res.status(400).send(err);
+        } else {
+            return res.json(images);
+        }
+    });
+}
+
+
 /**
  * Create image.
  *
