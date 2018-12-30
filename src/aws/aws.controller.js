@@ -28,10 +28,7 @@ aws.config.region = 'us-east-1';
 function signS3Upload(req, res) {
     const s3 = new aws.S3();
     // el nombre del folder llevar el id del usuario
-    //var folder = req.user._id +'/' ;
-
-    var folder = 'iduser0000001' +'/' ;
-  
+    var folder = req.user._id +'/' ;
     // crea la carpeta para guardar las imágenes
     var params = { Bucket: S3_BUCKET_NAME, Key: folder, ACL: 'public-read', Body:'body does not matter' };
     s3.upload(params, function (err, data) {
@@ -55,8 +52,7 @@ function signS3Upload(req, res) {
 
 
     // al fileName se le agrega el folder para que la firma lo reconozca
-    //const fileName = req.user._id +'/' + req.query['filename'];
-    const fileName = 'iduser0000001'  +'/' + req.query['filename'];
+    const fileName = req.user._id +'/' + req.query['filename'];
     const fileType = req.query['filetype'];
     // const s3Params = {
     //   Bucket: S3_BUCKET_NAME,
@@ -92,11 +88,8 @@ function signS3Upload(req, res) {
 
 function signS3Single(req, res){
   const s3 = new aws.S3();
-  //const fileName = req.query['file-name'];
-  //const fileType = req.query['file-type'];
-  const fileName = 'iduser0000001'  +'/' + req.query['filename'];
+  const fileName = req.user._id +'/' + req.query['filename'];
   const fileType = req.query['filetype'];
-
   const s3Params = {
     Bucket: S3_BUCKET_NAME,
     Key: fileName,
