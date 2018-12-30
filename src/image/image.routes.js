@@ -22,7 +22,8 @@ function setImageRoutes(app) {
     app.route('/images')
         .post(authentication.isAuthenticated, image.create)
         .get(authentication.isAuthenticated, image.findByUser);
-
+    app.route('/items')
+        .get(image.findAll);
     app.route('/images/:id').delete(authentication.isAuthenticated, image.delete);
 
 }
