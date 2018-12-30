@@ -19,14 +19,8 @@ var authentication = require('../authentication/authentication.controller.js');
  * @param {Object} app The express application
  */
 function setAWSRoutes(app) {
-    /*app.route('/aws')
-        .post(authentication.isAuthenticated, image.create)
-        .get(authentication.isAuthenticated, image.findByUser);*/
-    //app.route('/images/:id').delete(authentication.isAuthenticated, image.delete); 
-        app.route('/sign-s3-upload')
-        .get(aws.signS3Upload);
-        app.route('/sign-s3-single')
-        .get(aws.signS3Single);
+        app.route('/sign-s3-upload').get(authentication.isAuthenticated, aws.signS3Upload);
+        app.route('/sign-s3-single').get(authentication.isAuthenticated, aws.signS3Single);
 }
 
 module.exports = setAWSRoutes;
