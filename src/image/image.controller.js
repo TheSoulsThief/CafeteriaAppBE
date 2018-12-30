@@ -96,5 +96,6 @@ function deleteImage(req, res) {
 module.exports = {
     findByUser: findByUser,
     create: create,
-    delete: deleteImage
+    delete: deleteImage,
+    findAll: findAll
 };
