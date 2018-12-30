@@ -90,6 +90,7 @@ function signS3Single(req, res){
   const s3 = new aws.S3();
   const fileName = req.user._id +'/' + req.query['filename'];
   const fileType = req.query['filetype'];
+  var folder = req.user._id +'/' ;
   const s3Params = {
     Bucket: S3_BUCKET_NAME,
     Key: fileName,
@@ -97,6 +98,15 @@ function signS3Single(req, res){
     ContentType: fileType,
     ACL: 'public-read'
   };
+
+  var params = { Bucket: S3_BUCKET_NAME, Key: folder, ACL: 'public-read', Body:'body does not matter' };
+    s3.upload(params, function (err, data) {
+    if (err) {
+        console.log('Error creating the folder: ', err);
+        } else {
+          console.log("Successfully created a folder on S3");
+        }
+    });
 
   s3.getSignedUrl('putObject', s3Params, (err, data) => {
     if(err){
