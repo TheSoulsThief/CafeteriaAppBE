@@ -47,7 +47,8 @@ function create(req, res) {
     //image.url = path.join(req.body.url, req.files.image.path);
     image.fileName = req.body.fileName;
     image.url = req.body.url;
-    image.user = req.body.userId;
+    //image.user = req.body.userId;
+    image.user =  req.user._id;
     image.size = req.body.size;
     image.color = req.body.color;
 
