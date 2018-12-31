@@ -34,6 +34,15 @@ var ItemSchema = new mongoose.Schema({
     },
     color: {
         type: String
+    },
+    price: {
+        type: String
+    },
+    fileType: {
+        type: String
+    },
+    garmentName: {
+        type: String
     }
     // TODO: Ocasion
     // TODO: Formalidad
