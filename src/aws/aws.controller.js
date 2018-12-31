@@ -11,8 +11,7 @@
  * Module dependencies.
  */
 /*var path   = require('path');
-var logger = require('mm-node-logger')(module);
-var Image  = require('./image.model.js');*/
+var logger = require('mm-node-logger')(module);*/
 var logger = require('mm-node-logger')(module);
 var aws = require('aws-sdk');
 var S3_BUCKET_NAME = process.env.S3_BUCKET_NAME || 'doresuprueba';

@@ -1,5 +1,5 @@
 /**
- * Image model.
+ * Item model.
  *
  * @author    Johnny Yankee {@link http://atomikhero.com}
  * @copyright Copyright (c) 2018, Johnny Yankee
@@ -14,9 +14,9 @@ var mongoose = require('mongoose');
 var User = require('../user/user.model.js');
 
 /**
- * Image Schema
+ * Item Schema
  */
-var ImageSchema = new mongoose.Schema({
+var ItemSchema = new mongoose.Schema({
     fileName: {
         type: String
     },
@@ -39,4 +39,4 @@ var ImageSchema = new mongoose.Schema({
     // TODO: Formalidad
 });
 
-module.exports = mongoose.model('Image', ImageSchema);
+module.exports = mongoose.model('Item', ItemSchema);

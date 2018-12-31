@@ -170,9 +170,11 @@ function initErrorRoutes(app) {
  * @private
  */
 function initDB() {
-    if(config.seedDB) {
-        require('./seed');
-    }
+    // Desactivé esto para que no se carguen datos a la BD de forma
+    // automática
+    // if(config.seedDB) {
+    //     require('./seed');
+    // }
 }
 /**
  * Initialize the Express application.
