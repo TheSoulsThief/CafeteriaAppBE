@@ -21,7 +21,7 @@ var authentication = require('../authentication/authentication.controller.js');
 function setItemRoutes(app) {
     app.route('/items')
         .post(authentication.isAuthenticated, item.create)
-        .get(authentication.isAuthenticated, item.findByUser);
+        //.get(authentication.isAuthenticated, item.findByUser);
     app.route('/items')
         .get(item.findAll);
     app.route('/items/:id').delete(authentication.isAuthenticated, item.delete);
