@@ -34,7 +34,7 @@ function findByUser(req, res) {
 }
 
 function findAll(req, res) {
-    return Item.find({}, function (err, items{
+    return Item.find({}, function (err, items){
         if (err) {
             logger.error(err.message);
             return res.status(400).send(err);
