@@ -60,10 +60,12 @@ function create(req, res) {
     console.log(req.body);
     item.fileName = req.body.fileName;
     item.url = req.body.url;
-    //item.user = req.body.userId;
     item.user =  req.user._id;
     item.size = req.body.size;
     item.color = req.body.color;
+    item.price =  req.body.price;
+    item.garmetName = req.body.garmetName;
+    item.fileType = req.body.fileType;
 
     item.save(function(err, item) {
         if (err) {
