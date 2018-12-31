@@ -64,7 +64,7 @@ function create(req, res) {
     item.size = req.body.size;
     item.color = req.body.color;
     item.price =  req.body.price;
-    item.garmetName = req.body.garmetName;
+    item.garmentName = req.body.garmentName;
     item.fileType = req.body.fileType;
 
     item.save(function(err, item) {
