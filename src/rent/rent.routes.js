@@ -10,7 +10,7 @@
 /**
  * Module dependencies.
  */
-var item          = require('./item.controller.js');
+var rent          = require('./rent.controller.js');
 var authentication = require('../authentication/authentication.controller.js');
 
 /**
@@ -18,14 +18,13 @@ var authentication = require('../authentication/authentication.controller.js');
  *
  * @param {Object} app The express application
  */
-function setItemRoutes(app) {
-    app.route('/items')
-        .post(authentication.isAuthenticated, item.create)
-        //.get(authentication.isAuthenticated, item.findByUser);
-    app.route('/items')
-        .get(item.findAll);
-    app.route('/items/:id').delete(authentication.isAuthenticated, item.delete);
-
+function setRentRoutes(app) {
+    app.route('/rents')
+        .post(authentication.isAuthenticated, rent.create)
+        //.get(authentication.isAuthenticated, rent.findByUser);
+    app.route('/rents')
+        .get(rent.findAll);
+    //app.route('/rents/:id').delete(authentication.isAuthenticated, rent.delete);
 }
 
-module.exports = setItemRoutes;
+module.exports = setRentRoutes;
