@@ -32,16 +32,7 @@ module.exports = setPayPalRoutes;
 
 
 
-// router.get('/cancel', require('connect-ensure-login').ensureLoggedIn('/login'), function(req, res){
-//   console.log(req.body);
-//   console.log(req.query);
-//   var paymentId = req.query['paymentId'];
-//   var payer_id = req.query['PayerID']; 
-//   var execute_payment_json = {
-//         "payer_id": payer_id
-//   };
-//   res.redirect( '/cancelpayment' );
-// });
+
 
 
 // function findUsers(user, cb){

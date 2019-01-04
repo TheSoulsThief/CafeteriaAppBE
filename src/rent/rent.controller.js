@@ -13,7 +13,8 @@
 //var path   = require('path');
 var logger = require('mm-node-logger')(module);
 var Rent  = require('./rent.model.js');
-
+//var config = require('../config');
+var config = require('../config/paypal');
 /**
  * Find list of items by user id.
  *
