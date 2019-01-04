@@ -90,6 +90,100 @@ function create(req, res) {
 //     });
 // }
 
+
+/**
+ * confirmOrder.
+ *
+ * @param {Object} req The request object
+ * @param {Object} res The response object
+ * @returns {Object} the Order Status
+ * @api public
+ */
+function doConfirmOrder(req,res){
+    var createPaymentJson = {
+        'intent': 'sale',
+        'payer': {
+            'payment_method': 'paypal'
+        },
+        'redirect_urls': {
+            'return_url': config.paypal.return_url,
+            'cancel_url': config.paypal.cancel_url
+        },
+        'transactions': [{
+            'item_list': {
+                'items': [{
+                    'name': 'Images',
+                    'sku': '00001',
+                    'price': order.totalpay,
+                    'currency': 'USD',
+                    'quantity': 1
+                }]
+            },
+            'amount': {
+                'currency': 'USD',
+                'total': order.totalpay
+            },
+            'description': 'Images'
+        }]
+    };
+    console.log(createPaymentJson);
+    paypal.payment.create(createPaymentJson, function (error, payment) {
+        if (error) {
+            console.log(error);
+            cb( 1,'Problema al crear el pago', 'error');
+                // throw error;
+            //res.setHeader('Content-Type', 'application/json');
+            //res.send(error); 
+
+        } else {
+        
+            console.log("Create Payment Response");
+            console.log(payment);
+            //res.setHeader('Content-Type', 'application/json');
+            //res.send(payment);  
+            var href;
+            console.log(href);
+            for (var index = 0; index < payment.links.length; index++) {
+            //Redirect user to this endpoint for redirect url
+                if (payment.links[index].rel === 'approval_url') {
+                    console.log(payment.links[index].href);
+                    href = payment.links[index].href;
+                }
+            }
+
+            if (href != null){
+                //res.redirect(href);
+                //Actualizar Pedido
+
+                //numorder = numorder.replace(/0/g, ''); // quita los ceros del pedido
+                var conditions = { numorder: numorder }
+                , update = { $set: { paymentId: payment.id }}
+                , options = { multi: true };
+                Orders.update(conditions, update, options, function (err, numAffected) {
+                // numAffected is the number of updated documents
+                
+                if (err){
+                    console.log(err);
+                    cb( 1,'No fue posible actualizar el id del pedido');
+                }
+                else{
+                    // actualizar paquetes
+                    cb( 2,'Pedido normal', href);
+                }
+                });
+            }
+            else
+            {
+                // res.setHeader('Content-Type', 'application/json');
+                // res.send(payment); 
+                cb( 1,'Problema al crear el pago', 'error'); 
+            }
+        }
+    });
+};
+
+      
+
 module.exports = {
     //findByUser: findByUser,
     create: create,

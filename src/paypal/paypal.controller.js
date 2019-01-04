@@ -13,115 +13,186 @@
 /*var path   = require('path');
 var logger = require('mm-node-logger')(module);*/
 var logger = require('mm-node-logger')(module);
-var aws = require('aws-sdk');
-var S3_BUCKET_NAME = process.env.S3_BUCKET_NAME || 'doresuprueba';
-aws.config.region = 'us-east-1';
+//var aws = require('aws-sdk');
+//var express = require('express');
+//var config = require('../config');
+//var Orders = require('../models/order.js');
+//var OrderPacks = require('../models/orderpacks.js');
+//var User_details = require('../models/user_details.js');
+var mailer = require('../modules/send_email.js'); // Módulo para enviar correo
+//var router = express.Router();
+var paypal = require('paypal-rest-sdk');
+//var User = require('../models/user.js');
+require('../config_paypal');
+
+//var S3_BUCKET_NAME = process.env.S3_BUCKET_NAME || 'doresuprueba';
+//aws.config.region = 'us-east-1';
 /**
- * Crea una firma para poder subir una imagen a AWS S3.
+ * Crea .
  *
  * @param {Object} req The request object
  * @param {Object} res The request object
- * @returns {String} the sign of S3
+ * @returns {String} 
  * @api public
  */
-function signS3Upload(req, res) {
-    const s3 = new aws.S3();
-    // el nombre del folder llevar el id del usuario
-    var folder = req.user._id +'/' ;
-    // crea la carpeta para guardar las imágenes
-    var params = { Bucket: S3_BUCKET_NAME, Key: folder, ACL: 'public-read', Body:'body does not matter' };
-    s3.upload(params, function (err, data) {
-    if (err) {
-        console.log('Error creating the folder: ', err);
-        } else {
-        //console.log("Successfully created a folder on S3");
-        }
-    });
-    // crea la carpeta para guardar las vistas en miniatura de las imágenes
-    
-    /*var params = { Bucket: S3_BUCKET_NAME_THUMB, Key: folder, ACL: 'public-read', Body:'body does not matter' };
-    s3.upload(params, function (err, data) {
-    if (err) {
-        console.log("Error creating the folder thumbnail: ", err);
-        } else {
-        //console.log("Successfully created a thumbnail folder on S3");
+
+function payment (req, res){
+  console.log(req.body);
+  console.log(req.query);
+  //var paymentId = req.query['paymentId'];
+  //var payer_id = req.query['PayerID']; 
+  var paymentId = req.body.paymentId;
+  var payer_id = req.body.PayerID; 
   
-        }
-    });*/
-
-
-    // al fileName se le agrega el folder para que la firma lo reconozca
-    const fileName = req.user._id +'/' + req.query['filename'];
-    const fileType = req.query['filetype'];
-    // const s3Params = {
-    //   Bucket: S3_BUCKET_NAME,
-    //   Key: fileName,
-    //   Expires: 10000,
-    //   ContentType: fileType,
-    //   ACL: 'public-read'
-    // };
-    var policy = require('s3-policy');
-    var p = policy({
-      secret: process.env.AWS_SECRET_ACCESS_KEY,
-      length: 200000000,
-      bucket: S3_BUCKET_NAME,
-      key: fileName,
-      ContentType: fileType,
-      expires: new Date(Date.now() + 60000),
-      acl: 'public-read'
-    });
-    //console.log(p.policy);
-    //console.log(p.signature);
-    var result = {
-      AWSAccessKeyId: process.env.AWS_ACCESS_KEY_ID,
-      key: fileName,
-      policy: p.policy,
-      signature: p.signature,
-      url: `https://${S3_BUCKET_NAME}.s3.amazonaws.com/${fileName}`
-    };
-    //console.log(result);
-    res.setHeader('Content-Type', 'application/json');
-    res.write(JSON.stringify(result));
-    res.end();
-  }
-
-function signS3Single(req, res){
-  const s3 = new aws.S3();
-  const fileName = req.user._id +'/' + req.query['filename'];
-  const fileType = req.query['filetype'];
-  var folder = req.user._id +'/' ;
-  const s3Params = {
-    Bucket: S3_BUCKET_NAME,
-    Key: fileName,
-    Expires: 60,
-    ContentType: fileType,
-    ACL: 'public-read'
+  var execute_payment_json = {
+        "payer_id": payer_id
   };
 
-  var params = { Bucket: S3_BUCKET_NAME, Key: folder, ACL: 'public-read', Body:'body does not matter' };
-    s3.upload(params, function (err, data) {
-    if (err) {
-        console.log('Error creating the folder: ', err);
-        } else {
-          console.log("Successfully created a folder on S3");
-        }
-    });
+  Orders.findOne({paymentId:paymentId},function(err,orderrecord){
+    if (err){
+       req.session.message = 'Ocurrió un error al buscar, No se encontró un pedido para el id de pago';
+       res.redirect( '/error' );
+     }
+     else
+     {
+        if(orderrecord){
+            paypal.payment.execute(paymentId, execute_payment_json, function (err, payment) {
+                if (err) {
+                   console.log(err);
+                       // throw error;
+                   req.session.message = 'Ocurrió un error al realizar el pago: ' + err;
+                   res.redirect( '/error' );
+                } else {
+                    console.log("Get Payment Response");
+                    console.log(JSON.stringify(payment));
 
-  s3.getSignedUrl('putObject', s3Params, (err, data) => {
-    if(err){
-      console.log(err);
-      return res.end();
-    }
-    const returnData = {
-      signedRequest: data,
-      url: `https://${S3_BUCKET_NAME}.s3.amazonaws.com/${fileName}`
-    };
-    res.write(JSON.stringify(returnData));
-    res.end();
+                  var numorder = orderrecord.numorder; 
+                  var conditions = { numorder: numorder }
+                    , update = { $set: { status: 'En Proceso' }}
+                    , options = { multi: true };
+              
+                    Orders.update(conditions, update, options, function (err, numAffected) {
+                      // numAffected is the number of updated documents
+                     
+                      //console.log(numAffected);
+                      if (err){
+                          console.log(err);
+                          req.session.message = 'Ocurrió un error al guardar el pedido: ';
+                          res.redirect( '/error/' + numorder );
+                      }
+                      else{
+                          // actualizar paquetes
+
+                          OrderPacks.update(conditions, update, options, function (err, numAffected) {
+                            // numAffected is the number of updated documents
+                           
+                            //console.log(numAffected);
+                            if (err){
+                                console.log(err);
+                                req.session.message = 'Ocurrió un error al guardar el paquete del pedido: ';
+                                res.redirect('/error/' + numorder );
+                            }
+                            else{
+                                // actualizar paquetes
+                                User_details.findOne({userid:req.user._id},function(err,user_details){
+                                    if (err){
+                                      req.session.message = 'Ocurrió un error al buscar los detalles del usuario: ';
+                                      console.log(err);
+                                    } 
+                                    else{
+                                        // Si el usuario pide factura 
+                                        if(user_details.chk_factura == 'chk_factura'){
+                                          var mailOptions = {
+                                            from: '"Server" <server@mail-imgnpro.com>', // sender address
+                                            to: 'makeacfdi@mail-imgnpro.com, jerh56@gmail.com', // list of receivers
+                                            //to: 'jerh56@gmail.com', // list of receivers
+                                            subject: 'Factura', // Subject line
+                                            text: '', // plaintext body
+                                            //html: '<a href="www.imgnpro.com/confirmuser"</a>' // html body
+                                            html: '<html>' + 'Hola, el nombre de mi empresa es ' + user_details.factrazonsocial +
+                                            '<br><b> Necesito una factura electrónica</b><br>' + 'Mis datos son los siguientes:<br> <b>' + 
+                                            'Razón social:' + user_details.factrazonsocial + '<br>' +
+                                            'RFC:' + user_details.factrfc + '<br>' +
+                                            'Domicilio:' + user_details.factcalle + ',' + 
+                                                           user_details.factcolonia + ',' + 
+                                                           user_details.factnum_ext + ',' +
+                                                           user_details.factnum_int + ',' +
+                                                           user_details.factmunicipio + ',' +
+                                                           user_details.factciudad + ',' +
+                                                           user_details.factestado + ',' +
+                                                           user_details.sel_factcountry + ',' + '<br>' +
+                                            'Número de pedido:' + numorder + '<br>' +
+                                            'Monto total: USD ' + orderrecord.totalpay + '<br>' +
+                                            'Método de pago:' + user_details.factpaymethod + '<br>' +
+                                            'Terminación de la tarjeta:' + user_details.factterminacion + '<br>' +
+                                            'e-mail:  <span>' + user_details.factemail2 + '</span><br></b></html>'  // html body
+                                          };
+                                          mailer.sendEmail(mailOptions);
+                                        }
+                                    } 
+                                });
+                                var userDoc = {
+                                    'usertype':'designer',
+                                    'disabled':false
+                                };
+                                findUsers( userDoc, ( err, msg, designers ) => {
+                                    console.log( err, msg,designers ); 
+                                    if (err == 2){
+                                        var hostname = req.headers.host;
+                                        var mailOptions = {
+                                            from: '"Server" <server@mail-imgnpro.com>', // sender address
+                                            to: 'jerh56@gmail.com', // list of receivers
+                                            subject: 'Hay nuevos paquetes por atender', // Subject line
+                                            text: `Por favor ingresa al portal http://${hostname}/de_login`
+                                        };
+                                        mailer.sendEmail(mailOptions);
+                                    }else if ( err === 0){
+                                        var hostname = req.headers.host;
+                                        var useremails = getUserEmails(designers);
+                                        var mailOptions = {
+                                            from: '"Server" <server@mail-imgnpro.com>', // sender address
+                                            to: useremails, // list of receivers
+                                            subject: 'Hay nuevos paquetes por atender', // Subject line
+                                            text: `Por favor ingresa al portal http://${hostname}/de_login`
+                                        };
+                                        mailer.sendEmail(mailOptions);
+                                    }
+                                    
+                                });
+
+                                res.redirect('/thankyou/' + numorder );
+                            }
+                          });
+                          //cb( 0,'Se actualizó el estatus del pedido', href);
+                      }
+                    });
+              }
+            });
+        }
+        else
+        {
+            req.session.message = 'No se encontró un pedido para el id de pago: ';
+            res.redirect( '/error' );
+        }
+     }
   });
 };
 
+function cancel (req, res){
+  //console.log(req.body);
+  //console.log(req.query);
+  var paymentId = req.body.paymentId;
+  var payer_id = req.body.PayerID; 
+  var execute_payment_json = {
+        "payer_id": payer_id
+  };
+  // todo: adaptar esta línea ya que es una app móvil
+  res.redirect( '/cancelpayment' );
+};
+
+
+
 module.exports = {
-    signS3Upload: signS3Upload,
-    signS3Single: signS3Single
+    payment: payment,
+    cancel: cancel
 };
