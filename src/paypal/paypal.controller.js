@@ -23,7 +23,7 @@ var logger = require('mm-node-logger')(module);
 //var router = express.Router();
 var paypal = require('paypal-rest-sdk');
 //var User = require('../models/user.js');
-require('../config_paypal');
+require('../config/paypal');
 
 //var S3_BUCKET_NAME = process.env.S3_BUCKET_NAME || 'doresuprueba';
 //aws.config.region = 'us-east-1';
