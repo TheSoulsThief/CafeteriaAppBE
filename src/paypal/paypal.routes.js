@@ -20,9 +20,9 @@ var authentication = require('../authentication/authentication.controller.js');
  */
 function setPayPalRoutes(app) {
         app.route('/paypal/return')
-                .get(authentication.isAuthenticated, paypal.payment);
+                .get(paypal.payment);
         app.route('/paypal/cancel')
-                .get(authentication.isAuthenticated, paypal.cancel);
+                .get(paypal.cancel);
 
 }
 
