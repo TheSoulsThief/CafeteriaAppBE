@@ -15,7 +15,7 @@ var logger          = require('mm-node-logger')(module);
 var Rent            = require('./rent.model.js');
 //var config = require('../config');
 var config          = require('../config/paypal');
-var paypal          = require('./paypal.controller.js');
+var paypal          = require('paypal-rest-sdk');
 
 // TO DO: estas variables se pueden trasladar a un archivo de configuración
 var RETURN_URL_PAYPAL = process.env.RETURN_URL_PAYPAL || 'http://apptd.herokuap.com/paypal/return';
