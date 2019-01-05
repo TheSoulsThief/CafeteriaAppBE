@@ -156,7 +156,7 @@ function confirmOrder (req, res){
             }
             console.log(href);
             if (href !== null){
-                return res.json(href);
+                return res.status(201).json(href);
                 // TO DO: Actualizar inventario y dar de alta el pedido o renta
                 // TO DO: se puede invocar a la función Create de este mismo archivo.
                 // //res.redirect(href);
@@ -183,7 +183,7 @@ function confirmOrder (req, res){
                 // res.send(payment); 
                 //cb( 1,'Problema al crear el pago', 'error'); 
                 console.log(error);
-                return res.json(error);
+                return res.status(400).json(error);
             }
         }
     });
