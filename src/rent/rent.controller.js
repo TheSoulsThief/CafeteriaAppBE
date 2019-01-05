@@ -15,6 +15,11 @@ var logger = require('mm-node-logger')(module);
 var Rent  = require('./rent.model.js');
 //var config = require('../config');
 var config = require('../config/paypal');
+
+// TO DO: estas variables se pueden trasladar a un archivo de configuración
+var RETURN_URL_PAYPAL = process.env.RETURN_URL_PAYPAL || 'http://apptd.herokuap.com/paypal/return';
+var CANCEL_URL_PAYPAL = process.env.CANCEL_URL_PAYPAL || 'http://apptd.herokuap.com/paypal/cancel';
+
 /**
  * Find list of items by user id.
  *
@@ -100,22 +105,23 @@ function create(req, res) {
  * @returns {Object} the Order Status
  * @api public
  */
-function doConfirmOrder(req,res){
+function confirmOrder (req, res){
+    // todo: modificar por variables los valores de la estructura
     var createPaymentJson = {
         'intent': 'sale',
         'payer': {
             'payment_method': 'paypal'
         },
         'redirect_urls': {
-            'return_url': config.paypal.return_url,
-            'cancel_url': config.paypal.cancel_url
+            'return_url': RETURN_URL_PAYPAL,
+            'cancel_url': CANCEL_URL_PAYPAL
         },
         'transactions': [{
             'item_list': {
                 'items': [{
-                    'name': 'Images',
+                    'name': 'Rent a dress',
                     'sku': '00001',
-                    'price': order.totalpay,
+                    'price': '30',
                     'currency': 'USD',
                     'quantity': 1
                 }]
@@ -131,14 +137,11 @@ function doConfirmOrder(req,res){
     paypal.payment.create(createPaymentJson, function (error, payment) {
         if (error) {
             console.log(error);
-            cb( 1,'Problema al crear el pago', 'error');
-                // throw error;
-            //res.setHeader('Content-Type', 'application/json');
-            //res.send(error); 
-
+            //cb( 1,'Problema al crear el pago', 'error');
+            // throw error;res.setHeader('Content-Type', 'application/json');res.send(error); 
+            return res.json(error);
         } else {
-        
-            console.log("Create Payment Response");
+            console.log('Create Payment Response');
             console.log(payment);
             //res.setHeader('Content-Type', 'application/json');
             //res.send(payment);  
@@ -151,43 +154,44 @@ function doConfirmOrder(req,res){
                     href = payment.links[index].href;
                 }
             }
-
+            console.log(href);
             if (href != null){
-                //res.redirect(href);
-                //Actualizar Pedido
-
-                //numorder = numorder.replace(/0/g, ''); // quita los ceros del pedido
-                var conditions = { numorder: numorder }
-                , update = { $set: { paymentId: payment.id }}
-                , options = { multi: true };
-                Orders.update(conditions, update, options, function (err, numAffected) {
-                // numAffected is the number of updated documents
-                
-                if (err){
-                    console.log(err);
-                    cb( 1,'No fue posible actualizar el id del pedido');
-                }
-                else{
-                    // actualizar paquetes
-                    cb( 2,'Pedido normal', href);
-                }
-                });
+                // TO DO: Actualizar inventario y dar de alta el pedido o renta
+                // TO DO: se puede invocar a la función Create de este mismo archivo.
+                // //res.redirect(href);
+                // //Actualizar Pedido
+                // //numorder = numorder.replace(/0/g, ''); // quita los ceros del pedido
+                // var conditions = { numorder: numorder }
+                // , update = { $set: { paymentId: payment.id }}
+                // , options = { multi: true };
+                // Orders.update(conditions, update, options, function (err, numAffected) {
+                // // numAffected is the number of updated documents
+                // if (err){
+                //     console.log(err);
+                //     cb( 1,'No fue posible actualizar el id del pedido');
+                // }
+                // else{
+                //     // actualizar paquetes
+                //     cb( 2,'Pedido normal', href);
+                // }
+                // });
             }
             else
             {
                 // res.setHeader('Content-Type', 'application/json');
                 // res.send(payment); 
-                cb( 1,'Problema al crear el pago', 'error'); 
+                //cb( 1,'Problema al crear el pago', 'error'); 
+                console.log(error);
+                return res.json(error);
             }
         }
     });
-};
-
-      
+}
 
 module.exports = {
     //findByUser: findByUser,
     create: create,
     //delete: deleteItem,
-    findAll: findAll
+    findAll: findAll,
+    confirmOrder: confirmOrder
 };
