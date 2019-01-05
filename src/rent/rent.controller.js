@@ -18,8 +18,8 @@ var config          = require('../config/paypal');
 var paypal          = require('paypal-rest-sdk');
 
 // TO DO: estas variables se pueden trasladar a un archivo de configuración
-var RETURN_URL_PAYPAL = process.env.RETURN_URL_PAYPAL || 'http://apptd.herokuap.com/paypal/return';
-var CANCEL_URL_PAYPAL = process.env.CANCEL_URL_PAYPAL || 'http://apptd.herokuap.com/paypal/cancel';
+var RETURN_URL_PAYPAL = process.env.RETURN_URL_PAYPAL || 'http://apptd.herokuapp.com/paypal/return';
+var CANCEL_URL_PAYPAL = process.env.CANCEL_URL_PAYPAL || 'http://apptd.herokuapp.com/paypal/cancel';
 
 /**
  * Find list of items by user id.
