@@ -11,10 +11,11 @@
  * Module dependencies.
  */
 //var path   = require('path');
-var logger = require('mm-node-logger')(module);
-var Rent  = require('./rent.model.js');
+var logger          = require('mm-node-logger')(module);
+var Rent            = require('./rent.model.js');
 //var config = require('../config');
-var config = require('../config/paypal');
+var config          = require('../config/paypal');
+var paypal          = require('./paypal.controller.js');
 
 // TO DO: estas variables se pueden trasladar a un archivo de configuración
 var RETURN_URL_PAYPAL = process.env.RETURN_URL_PAYPAL || 'http://apptd.herokuap.com/paypal/return';
@@ -49,7 +50,6 @@ function findAll(req, res) {
         }
     });
 }
-
 
 /**
  * Create Rent.
@@ -128,7 +128,7 @@ function confirmOrder (req, res){
             },
             'amount': {
                 'currency': 'USD',
-                'total': order.totalpay
+                'total': '30'
             },
             'description': 'Images'
         }]
@@ -155,7 +155,7 @@ function confirmOrder (req, res){
                 }
             }
             console.log(href);
-            if (href != null){
+            if (href !== null){
                 // TO DO: Actualizar inventario y dar de alta el pedido o renta
                 // TO DO: se puede invocar a la función Create de este mismo archivo.
                 // //res.redirect(href);
