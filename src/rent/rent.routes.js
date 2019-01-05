@@ -20,10 +20,12 @@ var authentication = require('../authentication/authentication.controller.js');
  */
 function setRentRoutes(app) {
     app.route('/rents')
-        .post(authentication.isAuthenticated, rent.create)
+        .post(authentication.isAuthenticated, rent.create);
         //.get(authentication.isAuthenticated, rent.findByUser);
     app.route('/rents')
         .get(rent.findAll);
+    app.route('/confirmorder')
+        .post(authentication.isAuthenticated, rent.confirmOrder);
     //app.route('/rents/:id').delete(authentication.isAuthenticated, rent.delete);
 }
 
