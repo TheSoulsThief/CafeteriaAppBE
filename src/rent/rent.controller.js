@@ -156,6 +156,7 @@ function confirmOrder (req, res){
             }
             console.log(href);
             if (href !== null){
+                return res.json(href);
                 // TO DO: Actualizar inventario y dar de alta el pedido o renta
                 // TO DO: se puede invocar a la función Create de este mismo archivo.
                 // //res.redirect(href);
