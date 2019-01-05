@@ -27,6 +27,9 @@ node_modules/
 # Users Environment Variables
 .lock-wscript
 
+# Environment Variables
+.env
+
 # DevOps
 *.box
 .vagrant

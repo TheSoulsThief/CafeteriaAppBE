@@ -119,7 +119,7 @@ function signS3Single(req, res){
     res.write(JSON.stringify(returnData));
     res.end();
   });
-};
+}
 
 module.exports = {
     signS3Upload: signS3Upload,
