@@ -70,7 +70,8 @@ function payment (req, res){
             else { 
                 
                 //TO DO: redireccionar a la página de agradecimiento correcta
-                    return res.redirect('/thankyou/' + '1' );
+                    //http://apptdfront.herokuapp.com/#/rents
+                    return res.redirect('http://apptdfront.herokuapp.com/#/thanks' );
         //         console.log("Get Payment Response");
         //         console.log(JSON.stringify(payment));
 
