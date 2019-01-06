@@ -63,11 +63,13 @@ function payment (req, res){
             if (err) {
                 console.log(err);
                     // throw error;
-                req.session.message = 'Ocurrió un error al realizar el pago: ' + err;
+                //req.session.message = 'Ocurrió un error al realizar el pago: ' + err;
                 //res.redirect( '/error' );
                 return res.redirect('/error');
             } 
-            else { //TO DO: redireccionar a la página de agradecimiento correcta
+            else { 
+                
+                //TO DO: redireccionar a la página de agradecimiento correcta
                     return res.redirect('/thankyou/' + '1' );
         //         console.log("Get Payment Response");
         //         console.log(JSON.stringify(payment));
