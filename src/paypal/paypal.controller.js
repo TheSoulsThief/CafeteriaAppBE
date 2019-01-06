@@ -41,13 +41,18 @@ function payment (req, res){
   console.log(req.query);
   //var paymentId = req.query['paymentId'];
   //var payer_id = req.query['PayerID']; 
-  var paymentId = req.body.paymentId;
-  var payerId = req.body.PayerID; 
-  
-  var executePaymentJson = {
-        'payer_id': payerId
-  };
+  //var paymentId = req.body.paymentId;
+  //var payerId = req.body.PayerID; 
+  var payerId = { payer_id: req.query.PayerID };
+  var paymentId = req.query.paymentId;
+  console.log('paymentId');
+  console.log(paymentId);
+  console.log(payerId);
+  //var executePaymentJson = {
+ //       payer_id: payerId
+  //};
 
+  
 //   Orders.findOne({paymentId:paymentId},function(err,orderrecord){
 //     if (err){
 //        req.session.message = 'Ocurrió un error al buscar, No se encontró un pedido para el id de pago';
@@ -57,7 +62,7 @@ function payment (req, res){
 //      {
 //         if(orderrecord){
 
-    paypal.payment.execute(paymentId, executePaymentJson, 
+    paypal.payment.execute(paymentId, payerId, 
         function (err, payment) {
             console.log(payment);
             if (err) {
