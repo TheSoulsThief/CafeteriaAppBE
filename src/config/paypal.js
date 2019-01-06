@@ -12,3 +12,5 @@ paypal.configure({
 		'custom': 'header'
     }
 });
+console.log('Paypal');
+console.log(paypal.configure);
