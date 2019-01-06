@@ -120,17 +120,17 @@ function confirmOrder (req, res){
             'item_list': {
                 'items': [{
                     'name': 'Rent a dress',
-                    'sku': '00001',
-                    'price': '30',
+                    'sku': '00003',
+                    'price': '15',
                     'currency': 'USD',
-                    'quantity': 1
+                    'quantity': 2
                 }]
             },
             'amount': {
                 'currency': 'USD',
                 'total': '30'
             },
-            'description': 'Images'
+            'description': 'Dress'
         }]
     };
     console.log(createPaymentJson);
