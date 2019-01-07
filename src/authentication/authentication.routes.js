@@ -22,6 +22,7 @@ function setAuthenticationRoutes(app) {
     app.route('/auth/signout').get(authentication.signout);
     app.route('/auth/signup').post(authentication.signup);
     app.route('/auth/isAuthenticated').get(authentication.isAuthenticated);
+    app.route('/auth/forgotPassword').post(authentication.forgotPassword);
 }
 
 module.exports = setAuthenticationRoutes;
