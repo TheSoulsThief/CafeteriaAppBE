@@ -17,7 +17,7 @@ var Item = require('../item/item.model.js');
 /**
  * Item Schema
  */
-var RentSchema = new mongoose.Schema({
+var ItemSchema = new mongoose.Schema({
     user: {
         type: mongoose.Schema.Types.ObjectId,
         ref: User
@@ -29,4 +29,4 @@ var RentSchema = new mongoose.Schema({
     
 });
 
-module.exports = mongoose.model('Rent', RentSchema);
+module.exports = mongoose.model('Rent', ItemSchema);
