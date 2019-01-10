@@ -14,7 +14,7 @@ var logger   = require('mm-node-logger')(module);
 var passport = require('passport');
 var token    = require('./token.controller.js');
 var User     = require('../user/user.model.js');
-var mailer   = require('../utils/email-utils');
+//var mailer   = require('../utils/email-utils');
 
 /**
  * Signin with email after passport authentication.
@@ -143,7 +143,7 @@ function forgotPassword(req, res) {
     console.log(req.body);
 
     //TO DO : agregar variable de entorno para enviar correo
-    var mailOptions = {
+    /*var mailOptions = {
         from: '"Server" <server@mail-imgnpro.com>', // sender address
         to: 'makeacfdi@mail-imgnpro.com, jerh56@gmail.com', // list of receivers
         //to: 'jerh56@gmail.com', // list of receivers
@@ -169,7 +169,7 @@ function forgotPassword(req, res) {
         'e-mail:  <span>' + user_details.factemail2 + '</span><br></b></html>'  // html body
       };
     mailer.sendEmail(mailOptions);
-    return res.status(201).json(req.body.email);
+    return res.status(201).json(req.body.email);*/
 }
 
 module.exports = {
