@@ -20,7 +20,8 @@ var transporter = nodemailer.createTransport(transporter({
         pass : mailSender.pass
     }
 }));  
-var sendEmail = function(emailOptions){
+
+function sendEmail(emailOptions){
 	transporter.sendMail(emailOptions, function(error, info){
 	    if(error){
 	        return console.log(error);
@@ -28,4 +29,5 @@ var sendEmail = function(emailOptions){
 	    console.log('Message sent: ' + info.response);
 	});
 };
-module.exports.sendEmail = sendEmail;
+
+exports.sendEmail = sendEmail;
