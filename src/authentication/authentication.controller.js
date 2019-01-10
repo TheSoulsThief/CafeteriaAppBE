@@ -14,7 +14,7 @@ var logger   = require('mm-node-logger')(module);
 var passport = require('passport');
 var token    = require('./token.controller.js');
 var User     = require('../user/user.model.js');
-//var mailer   = require('../utils/email-utils');
+var mailer   = require('../utils/email-utils');
 
 /**
  * Signin with email after passport authentication.
