@@ -39,7 +39,7 @@ config.mongodb = {
    dbURI: "mongodb://admin:1j79ol4f@ds225902.mlab.com:25902/heroku_9k5qpd5n",
     //dbOptions: {"user": "user2", "pass": "123456"}
     //mongodb://<dbuser>:<dbpassword>@ds225902.mlab.com:25902/heroku_9k5qpd5n
-    dbOptions: { useNewUrlParser: true }
+    dbOptions: { useNewUrlParser: true, useCreateIndex: true }
 };
 
 // redis-13718.c9.us-east-1-2.ec2.cloud.redislabs.com:13718,  7AKiH2TfC3nkhh11UaI8ITULPMGOQ6fz
