@@ -21,6 +21,9 @@ var AddressSchema = new mongoose.Schema({
         type: mongoose.Schema.Types.ObjectId,
         ref: User
     },
+    fullname: {
+        type: String
+    },
     mainAddress: {
         type: Boolean
     },
@@ -51,10 +54,10 @@ var AddressSchema = new mongoose.Schema({
     noNumber: {
         type: Boolean
     },
-    addressComment: {
-        type: Boolean
-    },
     neighborhood: {
+        type: String
+    },
+    phone: {
         type: String
     },
     created: {
