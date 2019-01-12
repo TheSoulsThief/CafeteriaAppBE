@@ -26,7 +26,7 @@ var config = require('./config');
 function createMongooseConnection(cb) {
     // create the database connection
     mongoose.connect(config.mongodb.dbURI, config.mongodb.dbOptions);
-
+    mongoose.set('useCreateIndex', true);
     // when successfully connected
     mongoose.connection.on('connected', function () {
         logger.info('Mongoose connected to ' + config.mongodb.dbURI);
