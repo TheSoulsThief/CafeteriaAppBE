@@ -47,6 +47,18 @@ function createAddress(req, res) {
     console.log(req.body);
     address.user =  req.user._id;
     address.mainAddress =  req.body.mainAddress;
+    address.city =  req.body.city;
+    address.state =  req.body.state;
+    address.country =  req.body.country;
+    address.zipCode =  req.body.zipCode;
+    address.references =  req.body.references;
+    address.extraReferences =  req.body.extraReferences;
+    address.street =  req.body.street;
+    address.number =  req.body.number;
+    address.noNumber =  req.body.noNumber;
+    address.addressComment =  req.body.addressComment;
+    address.neighborhood =  req.body.neighborhood;
+
     // TO DO: agregar los demás atributos
     address.save(function(err, address) {
         if (err) {

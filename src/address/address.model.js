@@ -56,6 +56,10 @@ var AddressSchema = new mongoose.Schema({
     },
     neighborhood: {
         type: String
+    },
+    created: {
+        type: Date,
+        default: Date.now
     }
 });
 
