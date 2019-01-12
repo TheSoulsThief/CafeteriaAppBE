@@ -44,6 +44,7 @@ function findAll(req, res) {
  */
 function createAddress(req, res) {
     var address = new Address();
+    console.log(req);
     console.log(req.body);
     /*address.user =  req.user._id;
     address.mainAddress =  req.body.mainAddress;
