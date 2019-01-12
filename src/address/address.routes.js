@@ -20,7 +20,7 @@ var authentication = require('../authentication/authentication.controller.js');
  */
 function setAddressRoutes(app) {
     app.route('/address')
-        .post(address.create);
+        .post(authentication.isAuthenticated, address.create);
     app.route('/address')
         .get(authentication.isAuthenticated, address.findAll);
     app.route('/address/:id')
