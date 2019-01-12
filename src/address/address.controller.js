@@ -45,7 +45,7 @@ function findAll(req, res) {
 function createAddress(req, res) {
     var address = new Address();
     console.log(req.body);
-    address.user =  req.user._id;
+    /*address.user =  req.user._id;
     address.mainAddress =  req.body.mainAddress;
     address.city =  req.body.city;
     address.state =  req.body.state;
@@ -67,7 +67,7 @@ function createAddress(req, res) {
         } else {
             res.status(201).json(address);
         }
-    });
+    });*/
 }
 
 /**
