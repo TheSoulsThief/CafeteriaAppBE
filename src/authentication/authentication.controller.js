@@ -76,6 +76,7 @@ function signout(req, res) {
  * @api public
  */
 function signup(req, res) {
+    console.log(req.body);
     var email = req.body.email || '';
     var password = req.body.password || '';
 

@@ -31,17 +31,17 @@ config.server = {
 
 // MongoDB settings
 config.mongodb = {
-    //dbURI: process.env.MONGODB_URI || process.env.MONGOLAB_URI || "mongodb://127.0.0.1:27017/ionic-photo-gallery",
+    dbURI: process.env.MONGODB_URI || process.env.MONGOLAB_URI || "mongodb://127.0.0.1:27017/doresu",
    // dbURI: "mongodb://127.0.0.1:27017/ionic-photo-gallery",
 
    //mongodb://user:123456@localhost:27017/imgnpro
    //dbURI: "mongodb://root:123456@127.0.0.1:27017/admin",
-   dbURI: "mongodb://admin:1j79ol4f@ds225902.mlab.com:25902/heroku_9k5qpd5n",
-    //dbOptions: {"user": "user2", "pass": "123456"}
+   //dbURI: "mongodb://admin:1j79ol4f@ds225902.mlab.com:25902/heroku_9k5qpd5n",
+   // dbOptions: {"user": "admin", "pass": "123456"},
     //mongodb://<dbuser>:<dbpassword>@ds225902.mlab.com:25902/heroku_9k5qpd5n
     dbOptions: { useNewUrlParser: true }
 };
-
+console.log(config.mongodb);
 // redis-13718.c9.us-east-1-2.ec2.cloud.redislabs.com:13718,  7AKiH2TfC3nkhh11UaI8ITULPMGOQ6fz
 // Redis settings
 if (process.env.REDISTOGO_URL) {
@@ -60,10 +60,10 @@ if (process.env.REDISTOGO_URL) {
 
 config.redis = {
     isAvailable: process.env.IS_REDIS_AVAILABLE || true,
-    host: process.env.REDIS_HOST || 'redis-19858.c9.us-east-1-2.ec2.cloud.redislabs.com',
-    port: process.env.REDIS_PORT || 19858,
+    host: process.env.REDIS_HOST || '127.0.0.1',
+    port: process.env.REDIS_PORT || 6379,
     //password: process.env.auth_password || '7AKiH2TfC3nkhh11UaI8ITULPMGOQ6fz',
-    auth: process.env.REDIS_AUTH || '123456',
+    auth: process.env.REDIS_AUTH || '',
     options: {}
 };
 
