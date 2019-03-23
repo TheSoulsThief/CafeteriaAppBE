@@ -62,8 +62,8 @@ config.redis = {
     isAvailable: process.env.IS_REDIS_AVAILABLE || true,
     host: process.env.REDIS_HOST || '127.0.0.1',
     port: process.env.REDIS_PORT || 6379,
-    password: process.env.auth_password || '7AKiH2TfC3nkhh11UaI8ITULPMGOQ6fz',
-    //auth: process.env.REDIS_AUTH || '',
+    //password: process.env.auth_password || '7AKiH2TfC3nkhh11UaI8ITULPMGOQ6fz',
+    auth: process.env.REDIS_AUTH || '',
     options: {}
 };
 
