@@ -5,8 +5,8 @@
  *  - monitor the connection events (`connected`, `error` and `disconnected`)
  *  - close the connection when the app process terminates
  *
- * @author    Martin Micunda {@link http://martinmicunda.com}
- * @copyright Copyright (c) 2015, Martin Micunda
+ * @author    Johnny Yankee {@link http://martinmicunda.com}
+ * @copyright Copyright (c) 2017, Johnny Yankee
  * @license	  The MIT License {@link http://opensource.org/licenses/MIT}
  */
 'use strict';

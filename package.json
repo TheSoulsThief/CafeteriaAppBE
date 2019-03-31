@@ -1,7 +1,7 @@
 {
-    "name": "apptd-server",
-    "version": "0.0.1",
-    "description": "A hybrid app with authentication that allows registered users view a gallery of dresses photos they have uploaded via the camera phone.",
+    "name": "CafeteriaApp",
+    "version": "0.0.2",
+    "description": "A hybrid app with authentication that allows registered users order food end drinks they want to eat.",
     "author": {
         "name": "Johnny Yankee",
         "url": "http://atomikhero.com"
@@ -18,10 +18,10 @@
     ],
     "repository": {
         "type": "git",
-        "url": "https://github.com/martinmicunda/ionic-photo-gallery"
+        "url": "https://github.com/TheSoulsThief/CafeteriaAppBE"
     },
     "bugs": {
-        "url": "https://github.com/martinmicunda/ionic-photo-gallery/issues"
+        "url": "https://github.com/TheSoulsThief/CafeteriaAppBE/issues"
     },
     "files": [
         "src",
@@ -68,7 +68,7 @@
     },
     "license": {
         "type": "MIT",
-        "url": "https://github.com/jerh56/apptd1/master/LICENSE"
+        "url": "https://github.com/TheSoulsThief/CafeteriaAppBE/master/LICENSE"
     },
     "engines": {
         "node": ">=0.12",
