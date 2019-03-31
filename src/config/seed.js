@@ -1,8 +1,8 @@
 /**
  * Populate DB with sample data on server start to disable, edit config.js, and set `seedDB: false`
  *
- * @author    Martin Micunda {@link http://martinmicunda.com}
- * @copyright Copyright (c) 2015, Martin Micunda
+ * @author    Johnny Yankee {@link http://martinmicunda.com}
+ * @copyright Copyright (c) 2017, Johnny Yankee
  * @license   The MIT License {@link http://opensource.org/licenses/MIT}
  */
 
@@ -23,7 +23,7 @@
 // User.find({}).remove(function() {
 //     User.create({
 //             provider: 'local',
-//             name: 'Martin Micunda',
+//             name: 'Johnny Yankee',
 //             email: 'martinmicunda@test.com',
 //             password: 'test',
 //             avatar: 'https://avatars2.githubusercontent.com/u/1643606?v=3'
