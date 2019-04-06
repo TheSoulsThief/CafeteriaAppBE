@@ -17,7 +17,7 @@ var User = require('../user/user.model.js');
  * Item Schema
  */
 var ItemSchema = new mongoose.Schema({
-    fileName: {
+    itemName: {
         type: String
     },
     url: {
@@ -32,16 +32,10 @@ var ItemSchema = new mongoose.Schema({
     size: {
         type: String
     },
-    color: {
+    description: {
         type: String
     },
     price: {
-        type: String
-    },
-    fileType: {
-        type: String
-    },
-    garmentName: {
         type: String
     }
     // TODO: Ocasion
