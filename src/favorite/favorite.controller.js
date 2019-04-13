@@ -1,5 +1,5 @@
 /**
- * Rent controller.
+ * Order controller.
  *
  * @author    Johnny Yankee {@link http://atomikhero.com}
  * @copyright Copyright (c) 2018, Johnny Yankee
@@ -36,11 +36,11 @@ function findAll(req, res) {
 }
 
 /**
- * Create Rent.
+ * Create Order.
  *
  * @param {Object} req The request object
  * @param {Object} res The response object
- * @returns {Object} the new create rent
+ * @returns {Object} the new create order
  * @api public
  */
 function createFavorite(req, res) {
@@ -61,7 +61,7 @@ function createFavorite(req, res) {
 }
 
 /**
- * Delete rent.
+ * Delete order.
  *
  * @param {Object} req The request object
  * @param {Object} res The response object

@@ -1,5 +1,5 @@
 /**
- * Rent controller.
+ * order controller.
  *
  * @author    Johnny Yankee {@link http://atomikhero.com}
  * @copyright Copyright (c) 2018, Johnny Yankee
@@ -12,7 +12,7 @@
  */
 //var path   = require('path');
 var logger          = require('mm-node-logger')(module);
-var Rent            = require('./rent.model.js');
+var Order            = require('./order.model.js');
 //var config = require('../config');
 var config          = require('../config/paypal');
 var paypal          = require('paypal-rest-sdk');
@@ -41,45 +41,45 @@ var CANCEL_URL_PAYPAL = process.env.CANCEL_URL_PAYPAL || 'http://apptd.herokuapp
 // }
 
 function findAll(req, res) {
-    return Rent.find({}, function (err, rents){
+    return Order.find({}, function (err, orders){
         if (err) {
             logger.error(err.message);
             return res.status(400).send(err);
         } else {
-            return res.json(rents);
+            return res.json(orders);
         }
     });
 }
 
 /**
- * Create Rent.
+ * Create Order.
  *
  * @param {Object} req The request object
  * @param {Object} res The response object
- * @returns {Object} the new create rent
+ * @returns {Object} the new create order
  * @api public
  */
 function create(req, res) {
-    var rent = new Rent();
+    var order = new Order();
     //item.fileName = req.files.item.name;
     //item.url = path.join(req.body.url, req.files.item.path);
     console.log(req.body);
     
-    rent.user =  req.user._id;
-    rent.item =  req.body.idItem;
+    order.user =  req.user._id;
+    order.item =  req.body.idItem;
     
-    rent.save(function(err, rent) {
+    order.save(function(err, order) {
         if (err) {
             logger.error(err.message);
             return res.status(400).send(err);
         } else {
-            res.status(201).json(rent);
+            res.status(201).json(order);
         }
     });
 }
 
 /**
- * Delete rent.
+ * Delete order.
  *
  * @param {Object} req The request object
  * @param {Object} res The response object
@@ -105,6 +105,8 @@ function create(req, res) {
  * @returns {Object} the Order Status
  * @api public
  */
+
+ //****MODIFICAR****
 function confirmOrder (req, res){
     // todo: modificar por variables los valores de la estructura
     var createPaymentJson = {
@@ -119,7 +121,7 @@ function confirmOrder (req, res){
         'transactions': [{
             'item_list': {
                 'items': [{
-                    'name': 'Rent a dress',
+                    'name': 'Order a dress',
                     'sku': '00003',
                     'price': '15',
                     'currency': 'USD',
@@ -157,7 +159,7 @@ function confirmOrder (req, res){
             console.log(href);
             if (href !== null){
                 return res.status(201).json(href);
-                // TO DO: Actualizar inventario y dar de alta el pedido o renta
+                // TO DO: Actualizar inventario y dar de alta el pedido
                 // TO DO: se puede invocar a la función Create de este mismo archivo.
                 // //res.redirect(href);
                 // //Actualizar Pedido

@@ -1,5 +1,5 @@
 /**
- * Rent routes.
+ * Order routes.
  *
  * @author    Johnny Yankee {@link http://atomikhero.com}
  * @copyright Copyright (c) 2018, Johnny Yankee

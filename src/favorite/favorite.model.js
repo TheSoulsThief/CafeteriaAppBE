@@ -1,5 +1,5 @@
 /**
- * Rent model.
+ * Order model.
  *
  * @author    Johnny Yankee {@link http://atomikhero.com}
  * @copyright Copyright (c) 2018, Johnny Yankee
@@ -15,7 +15,7 @@ var User = require('../user/user.model.js');
 var Item = require('../item/item.model.js');
 
 /**
- * Rent Schema
+ * Order Schema
  */
 var FavoriteSchema = new mongoose.Schema({
     user: {
