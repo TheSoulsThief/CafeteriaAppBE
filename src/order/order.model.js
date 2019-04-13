@@ -1,5 +1,5 @@
 /**
- * Rent model.
+ * Order model.
  *
  * @author    Johnny Yankee {@link http://atomikhero.com}
  * @copyright Copyright (c) 2018, Johnny Yankee
@@ -15,9 +15,9 @@ var User = require('../user/user.model.js');
 var Item = require('../item/item.model.js');
 
 /**
- * Rent Schema
+ * Order Schema
  */
-var RentSchema = new mongoose.Schema({
+var OrderSchema = new mongoose.Schema({
     user: {
         type: mongoose.Schema.Types.ObjectId,
         ref: User
@@ -29,4 +29,4 @@ var RentSchema = new mongoose.Schema({
     
 });
 
-module.exports = mongoose.model('Rent', RentSchema);
+module.exports = mongoose.model('Order', OrderSchema);

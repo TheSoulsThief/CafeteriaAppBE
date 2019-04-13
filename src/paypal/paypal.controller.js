@@ -75,7 +75,7 @@ function payment (req, res){
             else { 
                 
                 //TO DO: redireccionar a la página de agradecimiento correcta
-                    //http://apptdfront.herokuapp.com/#/rents
+                    //http://apptdfront.herokuapp.com/#/orders
                     return res.redirect('http://apptdfront.herokuapp.com/#/thanks' );
         //         console.log("Get Payment Response");
         //         console.log(JSON.stringify(payment));
