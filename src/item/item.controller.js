@@ -58,14 +58,12 @@ function create(req, res) {
     //item.fileName = req.files.item.name;
     //item.url = path.join(req.body.url, req.files.item.path);
     console.log(req.body);
-    item.fileName = req.body.fileName;
+    item.itemName = req.body.itemName;
     item.url = req.body.url;
     item.user =  req.user._id;
     item.size = req.body.size;
-    item.color = req.body.color;
+    item.description = req.body.description;
     item.price =  req.body.price;
-    item.garmentName = req.body.garmentName;
-    item.fileType = req.body.fileType;
 
     item.save(function(err, item) {
         if (err) {
